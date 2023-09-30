@@ -1,0 +1,6 @@
+pageClasses\ProductSelection.class
+pageClasses\QuotePage.class
+pageClasses\LoginPage.class
+pageClasses\AbstractComponents.class
+pageClasses\ConvertToProposalPage.class
+TestData\DataMapper.class

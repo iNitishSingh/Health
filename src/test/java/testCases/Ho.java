@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -17,20 +18,7 @@ public class Ho {
 
 	public static void main(String[] args) throws InvalidFormatException, IOException {
 	
-		Map<String, String> NumberToMonth = new HashMap();
-		NumberToMonth.put("01", "Jan");
-		NumberToMonth.put("02", "Feb");
-		NumberToMonth.put("03", "Mar");
-		NumberToMonth.put("04", "Apr");
-		NumberToMonth.put("05", "May");
-		NumberToMonth.put("06", "Jun");
-		NumberToMonth.put("07", "Jul");
-		NumberToMonth.put("08", "Aug");
-		NumberToMonth.put("09", "Sep");
-		NumberToMonth.put("10", "Oct");
-		NumberToMonth.put("11", "Nov");
-		NumberToMonth.put("12", "Dec");
-		
-	
+		System.out.println(System.getProperty("user.dir") + "\\src\\main\\java\\testScreenshots\\");
+//		FileUtils.copyFile(new File("C:\\Users\\pshinde6\\Desktop\\test111.txt"), new File(System.getProperty("user.dir") + "\\src\\main\\java\\testScreenshots1\\demo.txt"));
 	}
 }

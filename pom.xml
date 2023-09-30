@@ -15,11 +15,13 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<dependencies>
+
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -68,6 +70,53 @@
 
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>firsttest</id>
+			<build>
+				<pluginManagement><!-- lock down plugins versions to avoid using
+					Maven 
+				defaults (may be moved to parent pom) -->
+					<plugins>
+
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-surefire-plugin</artifactId>
+							<version>3.1.2</version>
+							<configuration>
+								<suiteXmlFiles>
+									<suiteXmlFile>testSuite/baseTest.xml</suiteXmlFile>
+								</suiteXmlFiles>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+		<profile>
+			<id>secondtest</id>
+			<build>
+				<pluginManagement><!-- lock down plugins versions to avoid using
+					Maven 
+				defaults (may be moved to parent pom) -->
+					<plugins>
+
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-surefire-plugin</artifactId>
+							<version>3.1.2</version>
+							<configuration>
+								<suiteXmlFiles>
+									<suiteXmlFile>testSuite/addTest.xml</suiteXmlFile>
+								</suiteXmlFiles>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+
+	</profiles>
 	<build>
 		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
 				defaults (may be moved to parent pom) -->

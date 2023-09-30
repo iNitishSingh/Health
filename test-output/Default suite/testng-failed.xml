@@ -5,7 +5,7 @@
     <classes>
       <class name="testCases.BaseTest">
         <methods>
-          <include name="demo"/>
+          <include name="demo" invocation-numbers="0"/>
         </methods>
       </class> <!-- testCases.BaseTest -->
     </classes>

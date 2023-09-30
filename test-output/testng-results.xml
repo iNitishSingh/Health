@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-09-16T09:57:39 IST" name="Default suite" finished-at="2023-09-16T09:58:42 IST" duration-ms="63106">
+  <suite started-at="2023-09-30T10:17:56 IST" name="Suite" finished-at="2023-09-30T10:17:56 IST" duration-ms="87">
     <groups>
     </groups>
-    <test started-at="2023-09-16T09:57:39 IST" name="Default test" finished-at="2023-09-16T09:58:42 IST" duration-ms="63106">
-      <class name="testCases.BaseTest">
-        <test-method signature="demo()[pri:0, instance:testCases.BaseTest@2a798d51]" started-at="2023-09-16T09:57:39 IST" name="demo" finished-at="2023-09-16T09:58:42 IST" duration-ms="63052" status="PASS">
+    <test started-at="2023-09-30T10:17:56 IST" name="Test" finished-at="2023-09-30T10:17:56 IST" duration-ms="87">
+      <class name="testCases.basicTest">
+        <test-method signature="firsttest()[pri:0, instance:testCases.basicTest@12468a38]" started-at="2023-09-30T10:17:56 IST" name="firsttest" finished-at="2023-09-30T10:17:56 IST" duration-ms="11" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- demo -->
-      </class> <!-- testCases.BaseTest -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- firsttest -->
+        <test-method signature="secondtest()[pri:0, instance:testCases.basicTest@12468a38]" started-at="2023-09-30T10:17:56 IST" name="secondtest" finished-at="2023-09-30T10:17:56 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- secondtest -->
+        <test-method signature="thirdtest()[pri:0, instance:testCases.basicTest@12468a38]" started-at="2023-09-30T10:17:56 IST" name="thirdtest" finished-at="2023-09-30T10:17:56 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- thirdtest -->
+      </class> <!-- testCases.basicTest -->
+      <class name="testCases.advanceTest">
+        <test-method signature="fifthtest()[pri:0, instance:testCases.advanceTest@2d7275fc]" started-at="2023-09-30T10:17:56 IST" name="fifthtest" finished-at="2023-09-30T10:17:56 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fifthtest -->
+        <test-method signature="fourthtest()[pri:0, instance:testCases.advanceTest@2d7275fc]" started-at="2023-09-30T10:17:56 IST" name="fourthtest" finished-at="2023-09-30T10:17:56 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fourthtest -->
+        <test-method signature="sixthtest()[pri:0, instance:testCases.advanceTest@2d7275fc]" started-at="2023-09-30T10:17:56 IST" name="sixthtest" finished-at="2023-09-30T10:17:56 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- sixthtest -->
+      </class> <!-- testCases.advanceTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>
