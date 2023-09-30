@@ -8,6 +8,7 @@ public class basicTest {
 	public void firsttest() {
 		System.out.println("This is first test");
 		System.out.println(System.getProperty("brow"));
+		System.out.println("test");
 	}
 	@Test
 	public void secondtest() {
