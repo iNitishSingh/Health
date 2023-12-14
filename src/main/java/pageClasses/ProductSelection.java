@@ -16,10 +16,10 @@ public class ProductSelection extends AbstractComponents {
 
 	WebDriver driver;
 	@FindBy(css = ".theme-value")
-	List<WebElement> AllProducts;
+	private List<WebElement> AllProducts;
 
 	@FindBy(css = ".swal2-confirm")
-	WebElement Alert;
+	private WebElement Alert;
 	WebDriverWait wait;
 
 	public ProductSelection(WebDriver driver) throws FileNotFoundException, IOException {

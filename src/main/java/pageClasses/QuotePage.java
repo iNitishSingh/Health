@@ -1,17 +1,12 @@
 package pageClasses;
 
-import java.awt.RenderingHints.Key;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.net.ssl.KeyManagerFactorySpi;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -24,8 +19,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class QuotePage extends AbstractComponents {
 	WebDriver driver;
-	static HashMap<String, String> quotedata;
-
+	HashMap<String, String> quotedata;
+	Actions action;
 	WebDriverWait wait;
 
 	public QuotePage(WebDriver driver) throws FileNotFoundException, IOException {
@@ -33,63 +28,67 @@ public class QuotePage extends AbstractComponents {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		Duration timeout = Duration.ofSeconds(15);
+		Duration timeout = Duration.ofSeconds(20);
 		wait = new WebDriverWait(driver, timeout);
+		action = new Actions(driver);
 	}
 
 	@FindBy(xpath = "//button[contains(text(),'Quick Quote')]")
-	WebElement QuickQuote;
+	private WebElement QuickQuote;
 
 	@FindBy(css = "ng-select[formcontrolname='pincode']")
-	WebElement Pincode;
+	private WebElement Pincode;
 
 	@FindBy(css = "label[for='new_business']")
-	WebElement NewBusiness;
+	private WebElement NewBusiness;
 
 	@FindBy(css = "label[for='portability']")
-	WebElement Portability;
+	private WebElement Portability;
 
 	@FindBy(xpath = "//ng-select[@id='Plan'] //span[@class='ng-arrow-wrapper']")
-	WebElement Plan;
+	private WebElement Plan;
 
 	@FindBy(css = "div[role='option']")
-	List<WebElement> PlanTypes;
+	private List<WebElement> PlanTypes;
 
 	@FindBy(xpath = "//button[contains(text(),'Proceed')]")
-	WebElement ProceedButton;
+	private WebElement ProceedButton;
 
 	@FindBy(id = "not_included")
-	WebElement SelfIncludedCheckbox;
+	private WebElement SelfIncludedCheckbox;
 
 	@FindBy(css = "label[for='mem_is_aig_emp']")
-	WebElement SelfIsAnEmpCheckbox;
+	private WebElement SelfIsAnEmpCheckbox;
 
 	@FindBy(xpath = "//label[@for='checkbox3']")
-	WebElement Self;
+	private WebElement Self;
 
 	@FindBy(xpath = "//label[@for='checkbox4']")
-	WebElement Spouse;
+	private WebElement Spouse;
 
 	@FindBy(xpath = "//label[@for='checkbox5']")
-	WebElement Father;
+	private WebElement Father;
 
 	@FindBy(xpath = "//label[@for='checkbox6']")
-	WebElement Mother;
+	private WebElement Mother;
 
 	@FindBy(xpath = "//label[@for='checkbox7']")
-	WebElement Son;
+	private WebElement Son;
 
 	@FindBy(xpath = "//label[@for='checkbox8']")
-	WebElement Daughter;
+	private WebElement Daughter;
 
 	@FindBy(xpath = "//label[@for='checkbox9']")
-	WebElement FatherInLaw;
+	private WebElement FatherInLaw;
 
 	@FindBy(xpath = "//label[@for='checkbox10']")
-	WebElement MotherInLaw;
+	private WebElement MotherInLaw;
 
-	@FindBy(css = "input[formcontrolname='spouse_dob']")
-	List<WebElement> SpouseDOB;
+	@FindBy(css = "div[class*=\"row question flex-box-100 ng-star-inserted\"] div[class=\"toggle-btn\"]")
+	private WebElement NRIQ2;
+
+	@FindBy(css = "input[formcontrolname='Father_dob']")
+	private List<WebElement> FatherDOB;
 
 	@FindBy(xpath = "//select[@title='Select year'] //option[@class='ng-star-inserted']")
 	static List<WebElement> ListOfAllYears;
@@ -104,63 +103,78 @@ public class QuotePage extends AbstractComponents {
 	static List<WebElement> ListOfSumInsuredValues;
 
 	@FindBy(css = "ng-select[formcontrolname='Tenure']")
-	WebElement Tenure;
+	private WebElement Tenure;
 
 	@FindBy(className = "tata-card")
 	static List<WebElement> VarientCards;
 
 	@FindBy(xpath = "//button[contains(text(),'Share')]")
-	WebElement ShareButton;
+	private WebElement ShareButton;
 
 	@FindBy(xpath = "//button[contains(text(),'Save')]")
-	WebElement SaveButton;
+	private WebElement SaveButton;
 
 	@FindBy(css = "ng-select[name='title']")
-	WebElement TitleField;
+	private WebElement TitleField;
 
 	@FindBy(css = "div[role='option']")
-	List<WebElement> TitleList;
+	private List<WebElement> TitleList;
 
 	@FindBy(id = "cus")
-	WebElement CustFirstName;
+	private WebElement CustFirstName;
 
 	@FindBy(id = "midname")
-	WebElement CustMiddleName;
+	private WebElement CustMiddleName;
 
 	@FindBy(id = "lastname")
-	WebElement CustLastName;
+	private WebElement CustLastName;
 
 	@FindBy(id = "email")
-	WebElement CustEmail;
+	private WebElement CustEmail;
 
 	@FindBy(id = "phn")
-	WebElement CustMobile;
+	private WebElement CustMobile;
 
 	@FindBy(css = ".modal-body button")
-	WebElement QuoteShareButton;
+	private WebElement QuoteShareButton;
 
 	@FindBy(css = "div[class='modal-body']")
-	WebElement QuoteTemplate;
+	private WebElement QuoteTemplate;
 
 	@FindBy(xpath = "//div[@class='modal-body'] //button[@type='button']")
-	WebElement ViewQuoteButton;
+	private WebElement ViewQuoteButton;
+
+	@FindBy(css = "div[class='card-content pb-0']")
+	private WebElement ReviewQuotePage;
 
 	@FindBy(xpath = "//button[contains(text(),'Convert To Proposal')]")
-	WebElement ConvertToProposalButton;
+	private WebElement ConvertToProposalButton;
+
+	@FindBy(css = "div[class*='form-field radio-field col-md-6 col-lg-4 col-xl-3']  input[aria-autocomplete*='list']")
+	private WebElement TenureDropdown;
+	@FindBy(css = "div[class*='ng-option ng-star-inserted ng-option-marked']")
+	private WebElement TenureDropdownValue;
+
+	@FindBy(xpath = "//button[contains(text(),'Calculate')]")
+	private WebElement CalculateButton;
 
 	public void quoteGeneration(HashMap<String, String> quotedata)
 			throws InterruptedException, FileNotFoundException, IOException {
-		wait.until(ExpectedConditions.visibilityOf(QuickQuote));
-
-		QuickQuote.click();
-
-		wait.until(ExpectedConditions.visibilityOf(Pincode));
 		this.quotedata = quotedata;
-		Pincode.click();
-		Actions action = new Actions(driver);
-		action.sendKeys(quotedata.get("Pincode")).build().perform();
+		quoteGenerationPlanDetailsPage();
+		quoteGenerationFamilyMembersPage();
+		varientSelection();
+		custContactDetails();
+	}
 
-		Thread.sleep(1500);
+	private void quoteGenerationPlanDetailsPage() throws InterruptedException {
+		wait.until(ExpectedConditions.visibilityOf(QuickQuote));
+		QuickQuote.click();
+		wait.until(ExpectedConditions.visibilityOf(Pincode));
+//		this.quotedata = quotedata;
+		Pincode.click();
+		action.sendKeys(quotedata.get("Pincode")).build().perform();
+		Thread.sleep(1000);
 		List<WebElement> allpin = driver.findElements(By.cssSelector(".ng-option"));
 		for (WebElement pin : allpin) {
 			if (pin.getText().contains(quotedata.get("Pincode"))) {
@@ -174,17 +188,18 @@ public class QuotePage extends AbstractComponents {
 		} else {
 			Portability.click();
 		}
-
 		Plan.click();
-
 		driver.findElements(By.cssSelector("div[role='option']")).stream()
 				.filter(plantype -> plantype.getText().equalsIgnoreCase(quotedata.get("PlanType"))).findFirst()
 				.orElse(null).click();
 
 		ProceedButton.click();
+	}
+
+	private void quoteGenerationFamilyMembersPage() throws InterruptedException {
 		wait.until(ExpectedConditions.visibilityOf(Self));
 
-		if (quotedata.get("IsSelfIncluded").equalsIgnoreCase("Yes")) {
+		if (quotedata.get("IsSelfNotIncluded").equalsIgnoreCase("Yes")) {
 			SelfIncludedCheckbox.click();
 		}
 		if (quotedata.get("InMemberEmployee").equalsIgnoreCase("Yes")) {
@@ -193,70 +208,110 @@ public class QuotePage extends AbstractComponents {
 		}
 
 		if (quotedata.get("RelationshipSelf").equalsIgnoreCase("Self")) {
-			Self.click();
+			wait.until(ExpectedConditions.visibilityOf(Self));
+			wait.until(ExpectedConditions.elementToBeClickable(Self));
+			quoteGenerationInsuredDetails(Self, "Primary", quotedata.get("DOBSelf"), quotedata.get("SISelf"));
 
-			List<WebElement> kk = driver
-					.findElements(By.cssSelector("div[class*='dob-cards'] div[class*='theme-card']"));
-
-			for (WebElement k : kk) {
-				if (k.getText().contains("Primary")) {
-
-					QuotePage.insuredDOBAndSI(k, "11/11/1994", quotedata.get("SISelf"));
-				}
-			}
 		}
 		if (quotedata.get("RelationshipSpouse").equalsIgnoreCase("Spouse")) {
-			Spouse.click();
 
-			List<WebElement> kk = driver
-					.findElements(By.cssSelector("div[class*='dob-cards'] div[class*='theme-card']"));
+			quoteGenerationInsuredDetails(Spouse, "Spouse", quotedata.get("DOBSpouse"), quotedata.get("SISpouse"));
 
-			for (WebElement k : kk) {
-				if (k.getText().contains("Spouse")) {
-
-					QuotePage.insuredDOBAndSI(k, quotedata.get("DOBSpouse"), quotedata.get("SISpouse"));
-				}
-			}
 		}
 		if (quotedata.get("RelationshipFather").equalsIgnoreCase("Father")) {
-			Father.click();
+			quoteGenerationInsuredDetails(Father, "Father", quotedata.get("DOBFather"), quotedata.get("SIFather"));
 
-			List<WebElement> kk = driver
-					.findElements(By.cssSelector("div[class*='dob-cards'] div[class*='theme-card']"));
+		}
+		if (quotedata.get("RelationshipMother").equalsIgnoreCase("Mother")) {
+			quoteGenerationInsuredDetails(Mother, "Mother", quotedata.get("DOBMother"), quotedata.get("SIMother"));
 
-			for (WebElement k : kk) {
-				if (k.getText().contains("Father")) {
+		}
+		if (quotedata.get("RelationshipSon").equalsIgnoreCase("Son1")) {
+			quoteGenerationInsuredDetails(Son, "Son", quotedata.get("DOBSon"), quotedata.get("SISon"));
 
-					QuotePage.insuredDOBAndSI(k, quotedata.get("DOBFather"), quotedata.get("SIFather"));
+		}
+		if (quotedata.get("RelationshipDaughter").equalsIgnoreCase("Daughter1")) {
+			quoteGenerationInsuredDetails(Daughter, "Daughter", quotedata.get("DOBDaughter"),
+					quotedata.get("SIDaughter"));
+		}
+		if (quotedata.get("RelationshipFatherInLaw").equalsIgnoreCase("FatherInLaw")) {
+			quoteGenerationInsuredDetails(FatherInLaw, "FatherInLaw", quotedata.get("DOBFatherInLaw"),
+					quotedata.get("SIFatherInLaw"));
+		}
+		if (quotedata.get("RelationshipMotherInLaw").equalsIgnoreCase("MotherInLaw")) {
+			quoteGenerationInsuredDetails(MotherInLaw, "MotherInLaw", quotedata.get("DOBMotherInLaw"),
+					quotedata.get("SIMotherInLaw"));
+
+		}
+		scrollPageToEnd();
+		wait.until(ExpectedConditions.elementToBeClickable(ProceedButton));
+		ProceedButton.click();
+	}
+
+	private void quoteGenerationInsuredDetails(WebElement insured, String relationshipInsured, String DOBInsured,
+			String SIInsured) throws InterruptedException {
+		scrollPageUp();
+		wait.until(ExpectedConditions.visibilityOf(insured));
+		Thread.sleep(500);
+		insured.click();
+		List<WebElement> kk = driver.findElements(By.cssSelector("div[class*='dob-cards'] div[class*='theme-card']"));
+		for (WebElement k : kk) {
+			if (k.getText().contains(relationshipInsured)) {
+
+				insuredDOBAndSI(k, DOBInsured, SIInsured);
+			}
+		}
+
+	}
+
+	private void varientSelection() throws InterruptedException {
+		if (quotedata.get("Tenure").contains("1")) {
+			wait.until(ExpectedConditions.visibilityOfAllElements(VarientCards));
+			for (WebElement varientCard : VarientCards) {
+				if (varientCard.getText().contains("Medicare Premier")) {
+					varientCard.click();
+					ShareButton.click();
+				}
+			}
+		} else {
+			wait.until(ExpectedConditions.visibilityOfAllElements(VarientCards));
+			TenureDropdown.click();
+			action.sendKeys(quotedata.get("Tenure")).build().perform();
+			action.sendKeys(Keys.ENTER).build().perform();
+			Thread.sleep(1000);
+			scrollPageToEnd();
+			Thread.sleep(1000);
+			wait.until(ExpectedConditions.elementToBeClickable(CalculateButton));
+			CalculateButton.click();
+			Thread.sleep(1000);
+			wait.until(ExpectedConditions.visibilityOfAllElements(VarientCards));
+			scrollPageUp();
+			Thread.sleep(1000);
+			for (WebElement varientCard : VarientCards) {
+				if (varientCard.getText().contains("Medicare Premier")) {
+					varientCard.click();
+					scrollPageToEnd();
+					Thread.sleep(1000);
+					nriQuestionsSelection();
+					CalculateButton.click();
+					scrollPageToEnd();
+					wait.until(ExpectedConditions.elementToBeClickable(ShareButton));
+					ShareButton.click();
 				}
 			}
 		}
-
-		ProceedButton.click();
-
-		wait.until(ExpectedConditions.visibilityOfAllElements(VarientCards));
-
-		QuotePage quotepageobj = new QuotePage(driver);
-		quotepageobj.varientSelection();
-		quotepageobj.custContactDetails();
-
 	}
 
-	public void varientSelection() throws InterruptedException {
-		for (WebElement varientCard : VarientCards) {
-
-			if (varientCard.getText().contains(quotedata.get("Varient"))) {
-				varientCard.click();
-				ShareButton.click();
-				Thread.sleep(1000);
-			}
-
+	private void nriQuestionsSelection() {
+		if (quotedata.get("NRIQ2").equalsIgnoreCase("Yes")) {
+			scrollPageToEnd();
+			NRIQ2.click();
 		}
-
 	}
 
-	public void custContactDetails() throws InterruptedException, WebDriverException, IOException {
+	private void custContactDetails() throws InterruptedException, WebDriverException, IOException {
 		TitleField.click();
+		wait.until(ExpectedConditions.visibilityOfAllElements(TitleList));
 		TitleList.stream().filter(title -> title.getText().equalsIgnoreCase(quotedata.get("CustTitle"))).findFirst()
 				.orElse(null).click();
 		CustFirstName.sendKeys(quotedata.get("CustFirstName"));
@@ -266,25 +321,21 @@ public class QuotePage extends AbstractComponents {
 		CustMobile.sendKeys(quotedata.get("CustMobileNo"));
 		QuoteShareButton.click();
 		wait.until(ExpectedConditions.visibilityOf(ViewQuoteButton));
-		driver.findElement(By.xpath("//div[@class='modal-body'] //button[@type='button']")).click();
-		
+		wait.until(ExpectedConditions.elementToBeClickable(ViewQuoteButton));
+		ViewQuoteButton.click();
+		wait.until(ExpectedConditions.visibilityOf(ReviewQuotePage));
+		scrollPageToEnd();
 		wait.until(ExpectedConditions.elementToBeClickable(ConvertToProposalButton));
-//		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h3[contains(text(),'Review')]"))));
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,5000);");
-
-		Actions act =new Actions(driver);
-	String control=	Keys.chord(Keys.CONTROL,"F");
-		act.sendKeys(control).build().perform();
-		act.sendKeys("Proposal").build().perform();
-		act.sendKeys(Keys.ESCAPE).build().perform();
-		
-		Thread.sleep(1500);
+		Thread.sleep(1000);
 		ConvertToProposalButton.click();
 
 	}
 
-	public synchronized static void insuredDOBAndSI(WebElement insuredTemplate, String DOB, String SI)
+	private synchronized void insuredDOBAndSI(WebElement insuredTemplate, String DOB, String SI)
 			throws InterruptedException {
+		WebElement localInsuredTemplate = insuredTemplate;
+		String localDOB = DOB;
+		String localSI = SI;
 
 		String[] date = DOB.split("/");
 		Map<String, String> NumberToMonth = new HashMap<String, String>();
@@ -316,7 +367,14 @@ public class QuotePage extends AbstractComponents {
 		insuredTemplate.findElement(By.cssSelector("ng-select[placeholder='Select']")).click();
 		WebElement siSelected = ListOfSumInsuredValues.stream()
 				.filter(s -> s.getText().trim().replace(",", "").contains(SI)).findFirst().orElse(null);
+
+		if (siSelected == null) {
+			refreshPage();
+			insuredDOBAndSI(localInsuredTemplate, localDOB, localSI);
+		}
+
 		siSelected.click();
 
 	}
+
 }

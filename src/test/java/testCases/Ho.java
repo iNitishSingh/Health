@@ -1,24 +1,26 @@
 package testCases;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Test;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Ho {
 
-	public static void main(String[] args) throws InvalidFormatException, IOException {
-	
-		System.out.println(System.getProperty("user.dir") + "\\src\\main\\java\\testScreenshots\\");
-//		FileUtils.copyFile(new File("C:\\Users\\pshinde6\\Desktop\\test111.txt"), new File(System.getProperty("user.dir") + "\\src\\main\\java\\testScreenshots1\\demo.txt"));
+	@Test
+	public void test() throws InterruptedException {
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://qualitykiosk.com/");
+		Actions action = new Actions(driver);
+		Thread.sleep(15000);
+		//action.keyDown(Keys.CONTROL).keyDown("f").build().perform();
+		action.sendKeys(Keys.CONTROL,"f").perform();
+		
+		Thread.sleep(5000);
+		
 	}
 }

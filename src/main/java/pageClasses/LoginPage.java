@@ -1,17 +1,13 @@
 package pageClasses;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
-import java.util.Properties;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,43 +17,46 @@ public class LoginPage extends AbstractComponents {
 
 	WebDriver driver;
 //	WebDriverWait wait = new WebDriverWait(driver, Duration.)
-	
 
 	@FindBy(id = "user-name")
-	WebElement Username;
+	private WebElement Username;
 
 	@FindBy(css = "button[type='submit']")
-	WebElement SubmitButton;
+	private WebElement SubmitButton;
 
 	@FindBy(css = ".btn")
-	WebElement ConfirmButton;
+	private WebElement ConfirmButton;
 
 	@FindBy(css = "ng-select[role='listbox']")
-	WebElement LocationDropDown;
+	private WebElement LocationDropDown;
 
 	@FindBy(css = ".btn")
-	WebElement SignInButton;
+	private WebElement SignInButton;
 
 	@FindBy(css = "input[placeholder='Password']")
-	WebElement UserPassword;
+	private WebElement UserPassword;
 
 	@FindBy(css = ".ng-option-label")
-	List<WebElement> Branches;
+	private List<WebElement> Branches;
 
 	@FindBy(xpath = "//mr-4 //span")
-	WebElement HealtProducts;
-	
+	private WebElement HealtProducts;
+
 	@FindBy(xpath = "(//div[@class='card-text-wrapper'] //span[contains(text(),'Health')])[1]")
-	WebElement HealthTemplate;
-	
+	private WebElement HealthTemplate;
+
+	@FindBy(css = "div[class='row ng-star-inserted']")
+	private WebElement HomePageTemplate;
+
 	@FindBy(css = ".swal2-confirm")
-	WebElement Alert;
-WebDriverWait wait;
+	private WebElement Alert;
+	WebDriverWait wait;
+
 	public LoginPage(WebDriver driver) throws FileNotFoundException, IOException {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(this.driver, this);
-		Duration timeout = Duration.ofSeconds(15);
+		Duration timeout = Duration.ofSeconds(20);
 		wait = new WebDriverWait(driver, timeout);
 	}
 
@@ -66,23 +65,28 @@ WebDriverWait wait;
 		driver.get(prop.getProperty("url"));
 		Username.sendKeys(prop.getProperty("username"));
 		SubmitButton.click();
-//		wait.until(ExpectedConditions.visibilityOf(ConfirmButton));
-
 		wait.until(ExpectedConditions.visibilityOf(UserPassword));
 		UserPassword.sendKeys(prop.getProperty("password"));
 		SignInButton.click();
-		wait.until(ExpectedConditions.visibilityOf(LocationDropDown));
+		wait.until(ExpectedConditions.elementToBeClickable(LocationDropDown));
 		LocationDropDown.click();
-		Actions act = new Actions(driver);
-		act.sendKeys(LocationDropDown, prop.getProperty("location")).build().perform();
-		// Streams to search all branches parallely
+//		Actions act = new Actions(driver);
+		action.sendKeys(LocationDropDown, prop.getProperty("location")).build().perform();
 		Branches.stream().filter(branch -> branch.getText().equalsIgnoreCase(prop.getProperty("location"))).findFirst()
 				.orElse(null).click();
 		wait.until(ExpectedConditions.elementToBeClickable(ConfirmButton));
 		ConfirmButton.click();
-		Thread.sleep(10000);
-//		wait.until(ExpectedConditions.visibilityOf(HealthTemplate));
-		HealthTemplate.click();
+		wait.until(ExpectedConditions.visibilityOf(HomePageTemplate));
+		Thread.sleep(9000);
+		try {
+			HealthTemplate.click();
+		} catch (Exception e) {
+			System.out.println("Refreshing the page due to incomplete loading !!");
+			action.keyDown(Keys.CONTROL).keyDown(Keys.F5).build().perform();
+			Thread.sleep(9000);
+			HealthTemplate.click();
+		}
+		
 	}
 
 }
